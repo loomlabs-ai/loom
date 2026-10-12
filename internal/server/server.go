@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/loomlabs-ai/loom/internal/server/handlers/projects"
 	"github.com/loomlabs-ai/loom/internal/server/handlers/providers"
 )
 
@@ -22,6 +23,26 @@ func StartServer(port string) {
 		// Delete provider handler
 		r.Delete(
 			"/provider/{name}", providers.DeleteProvider,
+		)
+
+		// Create new project handler
+		r.Post(
+			"/projects", projects.CreateProject,
+		)
+
+		// List projects handler
+		r.Get(
+			"/projects", projects.ListProjects,
+		)
+
+		// Get project handler
+		r.Get(
+			"/projects/{id}", projects.GetProject,
+		)
+
+		// Delete project handler
+		r.Delete(
+			"/projects/{id}", projects.DeleteProject,
 		)
 	})
 
